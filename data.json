@@ -1,0 +1,39 @@
+[
+    {
+      "name": "John Doe",
+      "steps": 1000
+    },
+    {
+      "name": "Jane Doe",
+      "steps": 800
+    },
+    {
+      "name": "Mike Smith",
+      "steps": 700
+    },
+    {
+      "name": "Sarah Jones",
+      "steps": 600
+    },
+    {
+      "name": "David Williams",
+      "steps": 500
+    },
+    {
+      "name": "Emily Brown",
+      "steps": 400
+    },
+    {
+      "name": "Peter Green",
+      "steps": 300
+    },
+    {
+      "name": "Lily White",
+      "steps": 200
+    },
+    {
+      "name": "James Black",
+      "steps": 100
+    }
+  ]
+  
