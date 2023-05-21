@@ -1,15 +1,6 @@
-// App.js
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-} from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const App = () => {
+const HomeScreen = () => {
   const [data, setData] = useState("");
 
   const fetchData = async () => {
@@ -57,6 +48,55 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "black",
+    margin: 10,
+  },
+  list: {
+    margin: 10,
+  },
+  item: {
+    padding: 10,
+    borderRadius: 5,
+    backgroundColor: "lightgray",
+  },
+  name: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "black",
+  },
+  calories: {
+    fontSize: 14,
+    color: "black",
+  },
+  fat: {
+    fontSize: 14,
+    color: "black",
+  },
+  carbohydrates: {
+    fontSize: 14,
+    color: "black",
+  },
+  protein: {
+    fontSize: 14,
+    color: "black",
+  },
+  removeButton: {
+    backgroundColor: "red",
+    color: "white",
+    borderRadius: 5,
+    padding: 10,
+    margin: 10,
+  },
+  addButton: {
+    backgroundColor: "green",
+    color: "white",
+    borderRadius: 5,
+    padding: 10,
+    margin: 10,
+  },
 });
 
-export default App;
+export default HomeScreen;

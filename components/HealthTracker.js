@@ -1,12 +1,6 @@
 // HealthTracker.js
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-} from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 
 const HealthTracker = () => {
   const [steps, setSteps] = useState(0);
@@ -23,17 +17,17 @@ const HealthTracker = () => {
     <View style={styles.container}>
       <Text style={styles.header}>Health Tracker</Text>
       <View style={styles.list}>
-        <View key={i} style={styles.item}>
+        <View style={styles.item}>
           <Text style={styles.name}>{steps}</Text>
           <Button
             title="Increment Steps"
             style={styles.removeButton}
-            onPress={() => incrementSteps()}
+            onPress={incrementSteps}
           />
           <Button
             title="Decrement Steps"
             style={styles.addButton}
-            onPress={() => decrementSteps()}
+            onPress={decrementSteps}
           />
         </View>
       </View>
@@ -59,27 +53,11 @@ const styles = StyleSheet.create({
   item: {
     padding: 10,
     borderRadius: 5,
-    backgroundColor: "lightgray",
-  },
+    backgroundColor: "#D3D3D3",
+  },  
   name: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "black",
-  },
-  calories: {
-    fontSize: 14,
-    color: "black",
-  },
-  fat: {
-    fontSize: 14,
-    color: "black",
-  },
-  carbohydrates: {
-    fontSize: 14,
-    color: "black",
-  },
-  protein: {
-    fontSize: 14,
     color: "black",
   },
   removeButton: {

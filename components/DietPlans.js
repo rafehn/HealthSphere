@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   item: {
     padding: 10,
     borderRadius: 5,
-    backgroundColor: "lightgray",
+    backgroundColor: "D3D3D3",
   },
   name: {
     fontSize: 16,

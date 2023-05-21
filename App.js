@@ -1,77 +1,44 @@
-// App.js
 import React, { useState } from "react";
-import DietPlans from "./components/DietPlans";
-import HealthTracker from "./components/HealthTracker";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-} from "react-native";
+import styles from "./styles";
+import HomeScreen from "./screens/HomeScreen";
+import DietPlans from "./screens/DietPlans";
+import HealthTracker from "./screens/HealthTracker";
 
 const App = () => {
-  const [data, setData] = useState("");
+  const [currentScreen, setCurrentScreen] = useState("home");
 
-  const fetchData = async () => {
-    const response = await fetch("https://api.github.com/users/bard");
-    const json = await response.json();
-    setData(json.name);
-  };
-
-  const saveData = async () => {
-    await AsyncStorage.setItem("name", data);
-  };
-
-  const loadData = async () => {
-    const name = await AsyncStorage.getItem("name");
-    setData(name);
-  };
-
-  const [dietPlans, setDietPlans] = useState([]);
-
-  const addDietPlan = () => {
-    const newDietPlan = {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbohydrates: 0,
-      protein: 0,
-    };
-
-    setDietPlans([...dietPlans, newDietPlan]);
-  };
-
-  const removeDietPlan = (index) => {
-    setDietPlans(dietPlans.filter((dietPlan, i) => i !== index));
+  const onTabPress = (index) => {
+    setCurrentScreen(index);
   };
 
   return (
-    <View style={styles.container}>
-      <Text>Hello, world!</Text>
-      <TextInput
-        placeholder="Enter your name"
-        onChangeText={text => setData(text)}
-      />
-      <Button
-        title="Fetch Data"
-        onPress={fetchData}
-      />
-      <Button
-        title="Save Data"
-        onPress={saveData}
-      />
-      <Button
-        title="Load Data"
-        onPress={loadData}
-      />
-      <Text>{data}</Text>
-      <HealthTracker />
-    </View>
+    <MaterialBottomTabNavigator
+      initialRouteName="home"
+      onTabPress={onTabPress}
+      tabs={[
+        {
+          title: "Home",
+          icon: "ios-home",
+          index: 0,
+        },
+        {
+          title: "Diet Plans",
+          icon: "ios-list",
+          index: 1,
+        },
+        {
+          title: "Health Tracker",
+          icon: "ios-heart",
+          index: 2,
+        },
+      ]}
+    >
+      <HomeScreen />
+    </MaterialBottomTabNavigator>
   );
 };
 
-const styles = StyleSheet.create({
+const myStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
