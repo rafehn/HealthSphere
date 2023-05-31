@@ -1,98 +1,108 @@
-import React, { useState } from "react";
-import styles from "./styles";
-import HomeScreen from "./screens/HomeScreen";
-import DietPlans from "./screens/DietPlans";
-import HealthTracker from "./screens/HealthTracker";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, Image, Button, ScrollView } from "react-native";
+import { connect } from "react-redux";
+import { setDietPlan } from "./redux/store/actions/dietPlanActions";
+import { setHealthData } from "./redux/store/actions/healthDataActions";
+import * as Location from "expo-location";
+import Header from "./components/Header";
+import DietPlans from "./screens/DietPlanScreen";
+import HealthTracker from "./screens/HealthTrackerScreen";
+import UserProfile from "./screens/UserProfileScreen";
 
 const App = () => {
   const [currentScreen, setCurrentScreen] = useState("home");
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
+  const getLocation = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      setErrorMsg("Permission to access location was denied");
+      return;
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    setLocation(location);
+  };
 
   const onTabPress = (index) => {
     setCurrentScreen(index);
   };
 
   return (
-    <MaterialBottomTabNavigator
-      initialRouteName="home"
-      onTabPress={onTabPress}
-      tabs={[
-        {
-          title: "Home",
-          icon: "ios-home",
-          index: 0,
-        },
-        {
-          title: "Diet Plans",
-          icon: "ios-list",
-          index: 1,
-        },
-        {
-          title: "Health Tracker",
-          icon: "ios-heart",
-          index: 2,
-        },
-      ]}
-    >
-      <HomeScreen />
-    </MaterialBottomTabNavigator>
+    <View style={styles.container}>
+      <Header title="HealthSphere" />
+      <View style={styles.content}>
+        <View style={styles.tabBar}>
+          {/* ... */}
+        </View>
+        <ScrollView>
+          {currentScreen === "home" && (
+            <View style={styles.home}>
+              {/* Home screen content */}
+              <Text>Latitude: {location?.coords.latitude}</Text>
+              <Text>Longitude: {location?.coords.longitude}</Text>
+              {errorMsg && <Text>Error: {errorMsg}</Text>}
+            </View>
+          )}
+          {/* ... */}
+        </ScrollView>
+      </View>
+    </View>
   );
 };
 
-const myStyles = StyleSheet.create({
+
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: "#FFFFFF",
   },
-  header: {
+  content: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+  },
+  welcomeText: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "black",
-    margin: 10,
+    textAlign: "center",
+    marginBottom: 20,
   },
-  list: {
-    margin: 10,
+  descriptionText: {
+    fontSize: 16,
+    textAlign: "center",
+    marginBottom: 30,
   },
-  item: {
-    padding: 10,
-    borderRadius: 5,
-    backgroundColor: "lightgray",
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 20,
   },
-  name: {
+  button: {
+    flex: 1,
+    height: 50,
+    backgroundColor: "#2A9DF4",
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 5,
+  },
+  buttonText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "black",
+    color: "#FFFFFF",
   },
-  calories: {
-    fontSize: 14,
-    color: "black",
-  },
-  fat: {
-    fontSize: 14,
-    color: "black",
-  },
-  carbohydrates: {
-    fontSize: 14,
-    color: "black",
-  },
-  protein: {
-    fontSize: 14,
-    color: "black",
-  },
-  removeButton: {
-    backgroundColor: "red",
-    color: "white",
-    borderRadius: 5,
-    padding: 10,
-    margin: 10,
-  },
-  addButton: {
-    backgroundColor: "green",
-    color: "white",
-    borderRadius: 5,
-    padding: 10,
-    margin: 10,
+  backgroundImage: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
   },
 });
+
 
 export default App;

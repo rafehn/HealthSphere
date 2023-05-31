@@ -1,31 +1,32 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+
 import Header from '../components/Header';
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
-import { setDietPlan } from '../redux/store/actions/dietPlanActions';
+import { setHealthData } from '../redux/store/actions/healthDataActions';
 
-const DietPlanScreen = ({ dietPlan, setDietPlan }) => {
-  const [diet, setDiet] = React.useState(dietPlan);
+const HealthTrackerScreen = ({ healthData, setHealthData }) => {
+  const [health, setHealth] = React.useState(healthData);
 
-  const handleSaveDietPlan = () => {
-    setDietPlan(diet);
+  const handleSaveHealthData = () => {
+    setHealthData(health);
   };
 
   return (
     <View style={styles.container}>
-      <Header title="Diet Plan" />
+      <Header title="Health Tracker" />
       <View style={styles.content}>
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Enter Your Diet Plan:</Text>
+          <Text style={styles.label}>Enter Your Health Data:</Text>
           <TextInput
-            value={diet}
-            onChangeText={setDiet}
-            placeholder="e.g. Low carbs, High protein, Vegan"
+            value={health}
+            onChangeText={setHealth}
+            placeholder="e.g. Weight, Blood Pressure, Cholesterol"
           />
         </View>
-        <Button label="Save" onPress={handleSaveDietPlan} />
+        <Button label="Save" onPress={handleSaveHealthData} />
       </View>
     </View>
   );
@@ -52,12 +53,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  dietPlan: state.dietPlan,
+  healthData: state.healthData,
 });
 
 const mapDispatchToProps = {
-  setDietPlan,
+  setHealthData,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DietPlanScreen);
-
+export default connect(mapStateToProps, mapDispatchToProps)(HealthTrackerScreen);

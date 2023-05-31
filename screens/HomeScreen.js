@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import firebase from "../config/firebase";
 
 const HomeScreen = () => {
   const [data, setData] = useState("");
 
   const fetchData = async () => {
-    const response = await fetch("https://api.github.com/users/bard");
+    const response = await fetch("./data.json");
     const json = await response.json();
     setData(json.name);
   };
@@ -17,6 +18,18 @@ const HomeScreen = () => {
     const name = await AsyncStorage.getItem("name");
     setData(name);
   };
+
+
+
+// Function to fetch data from Firebase
+const fetchDataFromFirebase = async () => {
+  const snapshot = await firebase.database().ref("path/to/data").once("value");
+  const data = snapshot.val();
+  // Process the retrieved data as needed
+};
+
+// Call the function to fetch data
+fetchDataFromFirebase();
 
   return (
     <View style={styles.container}>

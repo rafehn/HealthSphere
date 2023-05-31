@@ -1,7 +1,7 @@
 {
   "name": "healthsphere",
   "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "App.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -14,8 +14,9 @@
     "@react-navigation/native": "^6.1.6",
     "expo": "~48.0.11",
     "expo-status-bar": "~1.4.4",
+    "firebase": "^9.22.1",
     "react": "18.2.0",
-    "react-native": "0.71.6",
+    "react-native": "^0.71.6",
     "react-native-gesture-handler": "^2.9.0",
     "react-native-reanimated": "~2.14.4",
     "react-native-screens": "^3.20.0",
@@ -27,6 +28,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
+  },
+  "engines": {
+    "node": "16.13.0",
+    "npm": "6.14.12",
+    "babel": "^7.15.8"
   },
   "private": true
 }
